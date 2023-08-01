@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+
 class TaskScreen extends StatelessWidget {
   const TaskScreen({Key? key}) : super(key: key);
 
@@ -78,24 +79,35 @@ class TasksList extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListView(
       children: const [
-        TaskTile(),
-        TaskTile(),
-        TaskTile()
+        TaskTile(taskName: 'Buy Milk',),
+        TaskTile(taskName: 'Buy detergent',),
+        TaskTile(taskName: 'BUy something',)
       ],
     );
   }
 }
 
-class TaskTile extends StatelessWidget {
+class TaskTile extends StatefulWidget {
   const TaskTile({
-    super.key,
+    super.key, required this.taskName,
   });
+final String taskName;
 
   @override
+  State<TaskTile> createState() => _TaskTileState();
+}
+
+class _TaskTileState extends State<TaskTile> {
+  bool isDone = false;
+  @override
   Widget build(BuildContext context) {
-    return  const ListTile(
-      title: Text('data'),
-      trailing: Checkbox(value: false, onChanged: null),
+    return  ListTile(
+      title: Text(widget.taskName),
+      trailing:  Checkbox(value: isDone, onChanged: (value){
+       setState(() {
+         isDone = value!;
+       });
+      }),
     );
   }
 }
