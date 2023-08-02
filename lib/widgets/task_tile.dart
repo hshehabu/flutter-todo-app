@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
+
 class TaskTile extends StatefulWidget {
-  const TaskTile({
-    super.key, required this.taskName,
-  });
+  const TaskTile({Key? key, required this.taskName}) : super(key: key);
   final String taskName;
 
   @override
@@ -13,13 +12,22 @@ class _TaskTileState extends State<TaskTile> {
   bool isDone = false;
   @override
   Widget build(BuildContext context) {
-    return  ListTile(
+    return ListTile(
       title: Text(widget.taskName),
-      trailing:  Checkbox(value: isDone, onChanged: (value){
-        setState(() {
-          isDone = value!;
-        });
-      }),
+      trailing:  TaskCheckbox(isDone:isDone,),
     );
   }
 }
+
+class TaskCheckbox extends StatelessWidget {
+  const TaskCheckbox({ required this.isDone});
+final bool isDone;
+  @override
+  Widget build(BuildContext context) {
+    return Checkbox(
+        value: isDone,
+        onChanged: (value) {
+        });
+  }
+}
+
