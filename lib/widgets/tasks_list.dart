@@ -11,16 +11,16 @@ class TasksList extends StatefulWidget {
 }
 
 class _TasksListState extends State<TasksList> {
-  List<Task> tasks = [];
+  List<Task> tasks = [
+    Task(name: 'buy bread', isDone: false),
+    Task(name: 'buy egg', isDone: false),
+    Task(name: 'buy tuna', isDone: false),
+  ];
+
   @override
   Widget build(BuildContext context) {
-    return ListView(
-      children: const [
-        TaskTile(taskName: 'Buy Milk',),
-        TaskTile(taskName: 'Buy detergent',),
-        TaskTile(taskName: 'BUy something',)
-      ],
-    );
+    return ListView.builder(itemBuilder: (context , index){
+      return TaskTile(isDone: tasks[index].isDone, taskTitle: tasks[index].name);
+    } , itemCount: tasks.length,);
   }
 }
-
