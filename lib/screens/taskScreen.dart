@@ -4,9 +4,7 @@ import 'package:flutter_todo_app/screens/add_task_screen.dart';
 import '../models/task.dart';
 import '../widgets/tasks_list.dart';
 
-
 class TaskScreen extends StatefulWidget {
-
   @override
   State<TaskScreen> createState() => _TaskScreenState();
 }
@@ -23,7 +21,15 @@ class _TaskScreenState extends State<TaskScreen> {
     return Scaffold(
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          showModalBottomSheet(context: context, builder: (context) => const AddTask(),);
+          showModalBottomSheet(
+            context: context,
+            builder: (context) => AddTask((value) {
+              setState(() {
+                tasks.add(Task(isDone: false, name: value));
+              });
+              Navigator.pop(context);
+             }),
+          );
         },
         backgroundColor: Colors.lightBlueAccent,
         child: const Icon(
@@ -38,10 +44,10 @@ class _TaskScreenState extends State<TaskScreen> {
           Container(
             padding: const EdgeInsets.only(
                 top: 60.0, left: 30.0, right: 30.0, bottom: 30.0),
-            child: const Column(
+            child:  Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                CircleAvatar(
+                const CircleAvatar(
                   backgroundColor: Colors.white,
                   radius: 30.0,
                   child: Icon(
@@ -50,10 +56,10 @@ class _TaskScreenState extends State<TaskScreen> {
                     color: Colors.lightBlueAccent,
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 10.0,
                 ),
-                Text(
+                const Text(
                   'Todoey',
                   style: TextStyle(
                     fontSize: 50.0,
@@ -62,8 +68,8 @@ class _TaskScreenState extends State<TaskScreen> {
                   ),
                 ),
                 Text(
-                  '12 Tasks',
-                  style: TextStyle(color: Colors.white, fontSize: 18.0),
+                  '${tasks.length} Tasks',
+                  style: const TextStyle(color: Colors.white, fontSize: 18.0),
                 ),
               ],
             ),
@@ -79,7 +85,7 @@ class _TaskScreenState extends State<TaskScreen> {
                   topLeft: Radius.circular(20.0),
                 ),
               ),
-              child:  TasksList(tasks: tasks),
+              child: TasksList(tasks),
             ),
           )
         ],
@@ -87,4 +93,3 @@ class _TaskScreenState extends State<TaskScreen> {
     );
   }
 }
-

@@ -4,7 +4,7 @@ import 'package:flutter_todo_app/widgets/task_tile.dart';
 import '../models/task.dart';
 
 class TasksList extends StatefulWidget {
-  const TasksList({super.key, required this.tasks});
+  const TasksList(this.tasks);
   final List<Task> tasks;
   @override
   State<TasksList> createState() => _TasksListState();
