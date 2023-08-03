@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
-class TaskTile extends StatelessWidget{
-
-  final bool isDone;
+class TaskTile extends StatelessWidget {
+   final bool isDone;
   final String taskTitle;
+ final Function (bool ?) checkboxCallback;
+  const TaskTile({super.key, required this.isDone, required this.taskTitle, required this.checkboxCallback});
 
-  const TaskTile({super.key, required this.isDone, required this.taskTitle});
   @override
   Widget build(BuildContext context) {
     return ListTile(
@@ -15,10 +15,9 @@ class TaskTile extends StatelessWidget{
             TextStyle(decoration: isDone ? TextDecoration.lineThrough : null),
       ),
       trailing: Checkbox(
-        value: isDone, onChanged: (bool? value) {  },
-        // onChanged: toggleCheckboxState,
+        value: isDone,
+        onChanged: checkboxCallback,
       ),
     );
   }
 }
-
