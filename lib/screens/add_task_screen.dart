@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_todo_app/models/text_data.dart';
+import 'package:provider/provider.dart';
 
 class AddTask extends StatelessWidget {
-  const AddTask(this.addTaskCallback);
-
-  final Function addTaskCallback;
 
   @override
   Widget build(BuildContext context) {
@@ -36,7 +35,11 @@ class AddTask extends StatelessWidget {
             ),
             ElevatedButton(
               onPressed:() {
-                addTaskCallback(taskTitle);
+                if(taskTitle != null){
+                  Provider.of<TaskData>(context , listen: false).addTask(taskTitle);
+                }
+              
+                Navigator.pop(context);
               },
               child: const Text('Add'),
             )
